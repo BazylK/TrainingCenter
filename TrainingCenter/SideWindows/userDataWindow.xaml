@@ -1,0 +1,34 @@
+﻿<Window x:Class="TrainingCenter.SideWindows.userDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainingCenter.SideWindows"
+        mc:Ignorable="d"
+        Title="userDataWindow" Height="409.552" Width="339.069">
+    <Grid>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="137,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding Email, Mode=TwoWay}"/>
+
+        <TextBox x:Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="137,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding FirstName, Mode=TwoWay}"/>
+        <TextBox x:Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="137,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding LastName, Mode=TwoWay}"/>
+        <TextBox x:Name="tbStreet" HorizontalAlignment="Left" Height="23" Margin="137,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding AdressStreet, Mode=TwoWay}"/>
+        <TextBox x:Name="tbHouseNr" HorizontalAlignment="Left" Height="23" Margin="137,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding AdressNumber, Mode=TwoWay}"/>
+        <TextBox x:Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="137,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding City, Mode=TwoWay}"/>
+        <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Height="23" Margin="137,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding Country, Mode=TwoWay}"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="35,49,0,0" VerticalAlignment="Top" Width="52"/>
+        <Label x:Name="lbPass1" Content="Nowe hasło" HorizontalAlignment="Left" Margin="35,78,0,0" VerticalAlignment="Top" Width="79"/>
+        <Label x:Name="lbPass2" Content="Powtórz hasło" HorizontalAlignment="Left" Margin="35,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.664,1.931" Width="97"/>
+        <Label Content="Imie" HorizontalAlignment="Left" Margin="35,134,0,0" VerticalAlignment="Top" Width="81"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="35,162,0,0" VerticalAlignment="Top" Width="72"/>
+        <Label Content="Ulica" HorizontalAlignment="Left" Margin="35,190,0,0" VerticalAlignment="Top" Width="47"/>
+        <Label Content="Nr" HorizontalAlignment="Left" Margin="35,218,0,0" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Miasto" HorizontalAlignment="Left" Margin="35,246,0,0" VerticalAlignment="Top" Width="62"/>
+        <Label Content="Kraj" HorizontalAlignment="Left" Margin="35,274,0,0" VerticalAlignment="Top" Width="40"/>
+        <Button x:Name="btCreate" Content="Zapisz" HorizontalAlignment="Left" Margin="60,310,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click_1" IsDefault="True"/>
+        <Button x:Name="btnExit" Content="Wyjdz" HorizontalAlignment="Left" Margin="189,310,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click"/>
+        <PasswordBox x:Name="tbPassword1" HorizontalAlignment="Left" Margin="137,78,0,0" VerticalAlignment="Top" Width="159" Height="23"/>
+        <PasswordBox x:Name="tbPassword2" HorizontalAlignment="Left" Margin="137,106,0,0" VerticalAlignment="Top" Width="159" Height="23"/>
+        <Label x:Name="lbTitle" Content="WhatToDoLabel" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+
+    </Grid>
+</Window>

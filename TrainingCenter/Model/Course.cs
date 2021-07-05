@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrainingCenter.Model
 {
-    class Course
+    public class Course
     {
         public int CourseId { get; set; }
         [StringLength(100)]

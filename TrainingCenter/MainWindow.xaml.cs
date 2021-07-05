@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrainingCenter.Model;
 
 namespace TrainingCenter
 {
@@ -20,6 +21,7 @@ namespace TrainingCenter
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Account logAccount;
         public MainWindow()
         {
             InitializeComponent();
