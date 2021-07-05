@@ -23,6 +23,7 @@ namespace TrainingCenter
         Account selectedAccount;
 
         ObservableCollection<Account> listAccounts;
+        ObservableCollection<Account> listAccountsSearch;
 
         DatabaseManager db;
 
@@ -30,8 +31,94 @@ namespace TrainingCenter
         {
             InitializeComponent();
             db = new DatabaseManager();
+            refreshAccountList();
+        }
+
+        void refreshAccountList()
+        {
             listAccounts = new ObservableCollection<Account>(db.getAccountList());
             listViewAccounts.ItemsSource = listAccounts;
+            searchAccount();
+        }
+
+        private void listViewAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedAccount = listViewAccounts.SelectedItem as Account;
+            this.DataContext = selectedAccount;
+        }
+
+        Account createAccountFromTextBox()
+        {
+            Account acc = new Account
+            {
+                Email = tbEmail.Text,
+                FirstName = tbFirstName.Text,
+                LastName = tbLastName.Text,
+                AccountType = cbAccountType.Text,
+                SignUpDate = DateTime.Now,
+                AdressStreet = tbStreet.Text,
+                AdressNumber = tbHouseNr.Text,
+                City = tbCity.Text,
+                Country = tbCountry.Text,
+                Notes = tbNotes.Text
+            };
+            return acc;
+        }
+
+        private void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            db.addAccount(createAccountFromTextBox());
+            refreshAccountList();
+        }
+
+        private void btEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewAccounts.SelectedValue != null)
+            {
+                Account editedAccount = createAccountFromTextBox();
+                editedAccount.SignUpDate = selectedAccount.SignUpDate;
+                editedAccount.AccountId = selectedAccount.AccountId;
+                db.editAccount(editedAccount);
+                refreshAccountList();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz pozycję do edycji", "Błąd");
+            }
+        }
+
+        private void btRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewAccounts.SelectedValue != null)
+            {
+                db.removeAccount(selectedAccount);
+                refreshAccountList();
+            }
+            else
+            {
+                MessageBox.Show("Wybierz pozycję do usunięcia", "Błąd");
+            }
+        }
+
+        void searchAccount()
+        {
+            if (tbSearchAccount.Text == "")
+            {
+                listViewAccounts.ItemsSource = listAccounts;
+            }
+            else
+            {
+                listAccountsSearch = new ObservableCollection<Account>
+                 (listAccounts.Where(x => x.FirstName.Contains(tbSearchAccount.Text)
+                 || x.LastName.Contains(tbSearchAccount.Text)
+                 || x.Email.Contains(tbSearchAccount.Text)));
+                listViewAccounts.ItemsSource = listAccountsSearch;
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           searchAccount();
         }
     }
 }

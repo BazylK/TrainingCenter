@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrainingCenter"
         mc:Ignorable="d"
-        Title="MainMenu" Height="450" Width="800">
+        Title="MainMenu" Height="476.828" Width="830.069">
     <Grid>
         <TabControl Margin="0,49,0,0" >
             <TabItem Header="Welcome">
@@ -13,34 +13,66 @@
             </TabItem>
             <TabItem Header="Konta użytkowników">
                 <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="273" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
+                    <GroupBox Header="Konto" HorizontalAlignment="Left" Height="333" Margin="567,0,0,0" VerticalAlignment="Top" Width="230" BorderThickness="1" BorderBrush="Black">
+                        <Grid Margin="0,0,0,0">
+                            <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="88,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Email, Mode=OneWay}" TabIndex="1"/>
+                            <TextBox x:Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="88,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding FirstName, Mode=OneWay}" TabIndex="2"/>
+                            <TextBox x:Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="88,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding LastName, Mode=OneWay}" TabIndex="3"/>
+                            <TextBox x:Name="tbStreet" HorizontalAlignment="Left" Height="23" Margin="88,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding AdressStreet, Mode=OneWay}" TabIndex="5"/>
+                            <TextBox x:Name="tbHouseNr" HorizontalAlignment="Left" Height="23" Margin="88,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding AdressNumber, Mode=OneWay}" TabIndex="6"/>
+                            <TextBox x:Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="88,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding City, Mode=OneWay}" TabIndex="7"/>
+                            <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Height="23" Margin="88,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Country, Mode=OneWay}" TabIndex="8"/>
+                            <Label Content="Email" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Imię" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.664,1.931"/>
+                            <Label Content="Typ Konta" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Ulica" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Numer domu" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Miasto" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Kraj" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbAccountType" HorizontalAlignment="Left" Margin="88,90,0,0" VerticalAlignment="Top" Width="120" TabIndex="4" IsEditable="True" IsReadOnly="True" Text="{Binding AccountType, Mode=OneWay}">
+                                <ComboBoxItem>Admin</ComboBoxItem>
+                                <ComboBoxItem>Teacher</ComboBoxItem>
+                                <ComboBoxItem>Student</ComboBoxItem>
+                            </ComboBox>
+                            <Label Content="Notki" HorizontalAlignment="Left" Margin="13,228,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="70" Margin="88,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Notes, Mode=OneWay}" TabIndex="8"/>
+                        </Grid>
+                    </GroupBox>
+                    <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="293" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewAccounts_SelectionChanged">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=UserId}" />
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=AccountId}" />
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}" />
                                 <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Path=FirstName}" />
                                 <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding Path=LastName}" />
+                                <GridViewColumn Header="Typ" DisplayMemberBinding="{Binding Path=AccountType}" />
                                 <GridViewColumn Header="Dołączył" DisplayMemberBinding="{Binding Path=SignUpDate}" />
                                 <GridViewColumn Header="Ulica" DisplayMemberBinding="{Binding Path=AdressStreet}" />
                                 <GridViewColumn Header="Nr" DisplayMemberBinding="{Binding Path=AdressNumber}" />
                                 <GridViewColumn Header="Miasto" DisplayMemberBinding="{Binding Path=City}" />
                                 <GridViewColumn Header="Kraj" DisplayMemberBinding="{Binding Path=Country}" />
-                                <GridViewColumn Header="Typ" DisplayMemberBinding="{Binding Path=AccountType}" />
+                                <GridViewColumn Header="Notki" DisplayMemberBinding="{Binding Path=Notes}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <Button x:Name="btAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="567,338,0,0" VerticalAlignment="Top" Width="75" Click="btAdd_Click"/>
+                    <Button x:Name="btEdit" Content="Zapisz" HorizontalAlignment="Left" Margin="647,338,0,0" VerticalAlignment="Top" Width="75" Click="btEdit_Click"/>
+                    <Button x:Name="btRemove" Content="Usuń" HorizontalAlignment="Left" Margin="727,338,0,0" VerticalAlignment="Top" Width="75" Click="btRemove_Click"/>
+                    <TextBox x:Name="tbSearchAccount" HorizontalAlignment="Left" Height="23" Margin="143,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="419" TextChanged="TextBox_TextChanged"/>
+                    <Label Content="Wyszukaj użytkownika" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Dodaj/usuń kurs">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Zarządzaj kursami">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Zapisz się na kurs">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Najbliższe zajęcia">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="TabItem">
@@ -48,6 +80,8 @@
             </TabItem>
         </TabControl>
         <Label x:Name="lbWelcomeMessage" Content="powitalnawiadomosc" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="713,10,0,0" VerticalAlignment="Top" Width="99" Height="32"/>
+        <Button Content="Edytuj dane" HorizontalAlignment="Left" Margin="609,10,0,0" VerticalAlignment="Top" Width="99" Height="32"/>
 
     </Grid>
 </Window>
