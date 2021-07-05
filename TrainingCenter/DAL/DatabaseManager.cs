@@ -37,5 +37,20 @@ namespace TrainingCenter.DAL
             db.Accounts.AddOrUpdate(account);
             db.SaveChanges();
         }
+        public bool isEmailAvailable(string email)
+        {
+            if (db.Accounts.Any(o => o.Email == email))
+            { return false; }
+            return true;
+        }
+        public bool isAccountInDatabase(string email)
+        {
+            return db.Accounts.Any(o => o.Email == email);
+        }
+        public Account findAccountWithEmail(string email)
+        {
+            Account emailAccount = db.Accounts.Single(o => o.Email == email);
+            return emailAccount;
+        }
     }
 }

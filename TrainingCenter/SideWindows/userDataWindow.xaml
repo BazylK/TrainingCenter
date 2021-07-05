@@ -24,8 +24,8 @@
         <Label Content="Nr" HorizontalAlignment="Left" Margin="35,218,0,0" VerticalAlignment="Top" Width="30"/>
         <Label Content="Miasto" HorizontalAlignment="Left" Margin="35,246,0,0" VerticalAlignment="Top" Width="62"/>
         <Label Content="Kraj" HorizontalAlignment="Left" Margin="35,274,0,0" VerticalAlignment="Top" Width="40"/>
-        <Button x:Name="btCreate" Content="Zapisz" HorizontalAlignment="Left" Margin="60,310,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click_1" IsDefault="True"/>
-        <Button x:Name="btnExit" Content="Wyjdz" HorizontalAlignment="Left" Margin="189,310,0,0" VerticalAlignment="Top" Width="96" Height="34" Click="Button_Click"/>
+        <Button x:Name="btCreate" Content="Zapisz" HorizontalAlignment="Left" Margin="60,310,0,0" VerticalAlignment="Top" Width="96" Height="34" IsDefault="True"/>
+        <Button x:Name="btnExit" Content="Wyjdz" HorizontalAlignment="Left" Margin="189,310,0,0" VerticalAlignment="Top" Width="96" Height="34"/>
         <PasswordBox x:Name="tbPassword1" HorizontalAlignment="Left" Margin="137,78,0,0" VerticalAlignment="Top" Width="159" Height="23"/>
         <PasswordBox x:Name="tbPassword2" HorizontalAlignment="Left" Margin="137,106,0,0" VerticalAlignment="Top" Width="159" Height="23"/>
         <Label x:Name="lbTitle" Content="WhatToDoLabel" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" FontSize="18"/>

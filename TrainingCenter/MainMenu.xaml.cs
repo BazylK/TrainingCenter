@@ -31,6 +31,9 @@ namespace TrainingCenter
         {
             InitializeComponent();
             db = new DatabaseManager();
+
+            lbWelcomeMessage.Content = "Witaj ponownie, " + MainWindow.logedInAccount.FirstName + " " + MainWindow.logedInAccount.LastName + "!";
+
             refreshAccountList();
         }
 
@@ -39,7 +42,7 @@ namespace TrainingCenter
             listAccounts = new ObservableCollection<Account>(db.getAccountList());
             listViewAccounts.ItemsSource = listAccounts;
             searchAccount();
-        }
+        } //odswieza listview z kontami
 
         private void listViewAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -77,6 +80,7 @@ namespace TrainingCenter
             {
                 Account editedAccount = createAccountFromTextBox();
                 editedAccount.SignUpDate = selectedAccount.SignUpDate;
+                editedAccount.Password = selectedAccount.Password;
                 editedAccount.AccountId = selectedAccount.AccountId;
                 db.editAccount(editedAccount);
                 refreshAccountList();

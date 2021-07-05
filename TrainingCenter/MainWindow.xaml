@@ -11,7 +11,7 @@
         <Label Content="Email:" HorizontalAlignment="Left" Margin="34,76,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Content="Hasło:" HorizontalAlignment="Left" Margin="34,141,0,0" VerticalAlignment="Top" FontSize="24"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="42" Margin="106,76,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190" FontSize="24"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="106,141,0,0" VerticalAlignment="Top" Height="42" Width="190" FontSize="24" Password="admin"/>
+        <PasswordBox x:Name="pbPassword" HorizontalAlignment="Left" Margin="106,141,0,0" VerticalAlignment="Top" Height="42" Width="190" FontSize="24" Password="admin"/>
         <Button x:Name="btLogin" Content="Zaloguj" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="150" Height="54" FontSize="24" Click="btLogin_Click"/>
         <Button x:Name="btNewAccount" Content="Nowe konto" HorizontalAlignment="Left" Margin="171,200,0,0" VerticalAlignment="Top" Width="150" Height="54" FontSize="24" Click="btNewAccount_Click"/>
 

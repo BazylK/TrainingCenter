@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrainingCenter.Model;
+using TrainingCenter.DAL;
+using TrainingCenter.AdditionalClasses;
 
 namespace TrainingCenter
 {
@@ -21,16 +23,35 @@ namespace TrainingCenter
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Account logAccount;
+        public static Account logedInAccount;
+        DatabaseManager db;
+        
         public MainWindow()
         {
             InitializeComponent();
+            db = new DatabaseManager();
         }
         private void btLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu newWindow = new MainMenu();
-            this.Close();
-            newWindow.Show();
+            if (db.isAccountInDatabase(tbEmail.Text))
+            {
+                Account accountCheck = db.findAccountWithEmail(tbEmail.Text);
+                if (PasswordHasher.Verify(pbPassword.Password, accountCheck.Password))
+                {
+                    logedInAccount = accountCheck;
+                    MainMenu newWindow = new MainMenu();
+                    this.Close();
+                    newWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Złe hasło");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne dane");
+            }
         }
 
         private void btNewAccount_Click(object sender, RoutedEventArgs e)
