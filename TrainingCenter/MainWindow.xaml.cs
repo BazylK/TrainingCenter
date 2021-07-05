@@ -24,5 +24,16 @@ namespace TrainingCenter
         {
             InitializeComponent();
         }
+        private void btLogin_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu newWindow = new MainMenu();
+            this.Close();
+            newWindow.Show();
+        }
+
+        private void btNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

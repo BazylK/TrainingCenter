@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrainingCenter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Logowanie" Height="315.517" Width="352.586">
     <Grid>
-        
+        <Label Content="Logowanie" HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="34,76,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Hasło:" HorizontalAlignment="Left" Margin="34,141,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="42" Margin="106,76,0,0" TextWrapping="Wrap" Text="admin" VerticalAlignment="Top" Width="190" FontSize="24"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="106,141,0,0" VerticalAlignment="Top" Height="42" Width="190" FontSize="24" Password="admin"/>
+        <Button x:Name="btLogin" Content="Zaloguj" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="150" Height="54" FontSize="24" Click="btLogin_Click"/>
+        <Button x:Name="btNewAccount" Content="Nowe konto" HorizontalAlignment="Left" Margin="171,200,0,0" VerticalAlignment="Top" Width="150" Height="54" FontSize="24" Click="btNewAccount_Click"/>
+
     </Grid>
 </Window>
