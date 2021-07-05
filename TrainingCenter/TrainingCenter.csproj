@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,7 +81,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL\CenterContext.cs" />
+    <Compile Include="DAL\DatabaseManager.cs" />
     <Compile Include="DAL\SchoolInitializer.cs" />
+    <Compile Include="EntityDataModel.cs" />
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>

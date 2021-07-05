@@ -9,6 +9,7 @@ namespace TrainingCenter.Model
 {
     class CourseStudents
     {
+        public int CourseStudentsId { get; set; }
         public Course Course { get; set; }
         public Account Student { get; set; }
 

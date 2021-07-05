@@ -16,7 +16,16 @@
                     <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="273" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn/>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=UserId}" />
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}" />
+                                <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Path=FirstName}" />
+                                <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding Path=LastName}" />
+                                <GridViewColumn Header="Dołączył" DisplayMemberBinding="{Binding Path=SignUpDate}" />
+                                <GridViewColumn Header="Ulica" DisplayMemberBinding="{Binding Path=AdressStreet}" />
+                                <GridViewColumn Header="Nr" DisplayMemberBinding="{Binding Path=AdressNumber}" />
+                                <GridViewColumn Header="Miasto" DisplayMemberBinding="{Binding Path=City}" />
+                                <GridViewColumn Header="Kraj" DisplayMemberBinding="{Binding Path=Country}" />
+                                <GridViewColumn Header="Typ" DisplayMemberBinding="{Binding Path=AccountType}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

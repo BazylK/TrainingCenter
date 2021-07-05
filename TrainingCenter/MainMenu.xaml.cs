@@ -11,14 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrainingCenter.DAL;
+using TrainingCenter.AdditionalClasses;
+using TrainingCenter.Model;
+using System.Collections.ObjectModel;
 
 namespace TrainingCenter
 {
     public partial class MainMenu : Window
     {
+        Account selectedAccount;
+
+        ObservableCollection<Account> listAccounts;
+
+        DatabaseManager db;
+
         public MainMenu()
         {
             InitializeComponent();
+            db = new DatabaseManager();
+            listAccounts = new ObservableCollection<Account>(db.getAccountList());
+            listViewAccounts.ItemsSource = listAccounts;
         }
     }
 }
