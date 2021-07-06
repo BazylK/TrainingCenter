@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdditionalClasses\DataCheck.cs" />
     <Compile Include="SideWindows\userDataWindow.xaml.cs">
       <DependentUpon>userDataWindow.xaml</DependentUpon>
     </Compile>

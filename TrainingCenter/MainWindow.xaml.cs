@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TrainingCenter.Model;
 using TrainingCenter.DAL;
 using TrainingCenter.AdditionalClasses;
+using TrainingCenter.SideWindows;
 
 namespace TrainingCenter
 {
@@ -24,12 +25,14 @@ namespace TrainingCenter
     public partial class MainWindow : Window
     {
         public static Account logedInAccount;
+        public static bool zalogowany;
         DatabaseManager db;
         
         public MainWindow()
         {
             InitializeComponent();
             db = new DatabaseManager();
+            zalogowany = false;
         }
         private void btLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -38,6 +41,7 @@ namespace TrainingCenter
                 Account accountCheck = db.findAccountWithEmail(tbEmail.Text);
                 if (PasswordHasher.Verify(pbPassword.Password, accountCheck.Password))
                 {
+                    zalogowany = true;
                     logedInAccount = accountCheck;
                     MainMenu newWindow = new MainMenu();
                     this.Close();
@@ -56,7 +60,8 @@ namespace TrainingCenter
 
         private void btNewAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            userDataWindow uDW = new userDataWindow();
+            uDW.ShowDialog();
         }
     }
 }
