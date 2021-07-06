@@ -22,17 +22,17 @@ namespace TrainingCenter.DAL
             var accounts = (from p in db.Accounts select p).ToList();
             return accounts;
         }
-        public void addAccount(Account account)
+        public void addObjToDB(Account account)
         {
             db.Accounts.Add(account);
             db.SaveChanges();
         }
-        public void removeAccount(Account account)
+        public void removeObjFromDB(Account account)
         {
             db.Accounts.Remove(account);
             db.SaveChanges();
         }
-        public void editAccount(Account account)
+        public void editObjInDB(Account account)
         {
             db.Accounts.AddOrUpdate(account);
             db.SaveChanges();
@@ -51,6 +51,26 @@ namespace TrainingCenter.DAL
         {
             Account emailAccount = db.Accounts.Single(o => o.Email == email);
             return emailAccount;
+        }
+        public List<Course> getCourseList()
+        {
+            var courses = (from p in db.Courses select p).ToList();
+            return courses;
+        }
+        public void addObjToDB(Course course)
+        {
+            db.Courses.Add(course);
+            db.SaveChanges();
+        }
+        public void removeObjFromDB(Course course)
+        {
+            db.Courses.Remove(course);
+            db.SaveChanges();
+        }
+        public void editObjInDB(Course course)
+        {
+            db.Courses.AddOrUpdate(course);
+            db.SaveChanges();
         }
     }
 }

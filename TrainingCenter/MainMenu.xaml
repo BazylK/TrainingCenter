@@ -39,7 +39,7 @@
                             <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="70" Margin="88,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Notes, Mode=OneWay}" TabIndex="8"/>
                         </Grid>
                     </GroupBox>
-                    <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="293" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewAccounts_SelectionChanged">
+                    <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="321" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewAccounts_SelectionChanged">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=AccountId}" />
@@ -59,15 +59,48 @@
                     <Button x:Name="btAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="567,338,0,0" VerticalAlignment="Top" Width="75" Click="btAdd_Click"/>
                     <Button x:Name="btEdit" Content="Zapisz" HorizontalAlignment="Left" Margin="647,338,0,0" VerticalAlignment="Top" Width="75" Click="btEdit_Click"/>
                     <Button x:Name="btRemove" Content="Usuń" HorizontalAlignment="Left" Margin="727,338,0,0" VerticalAlignment="Top" Width="75" Click="btRemove_Click"/>
-                    <TextBox x:Name="tbSearchAccount" HorizontalAlignment="Left" Height="23" Margin="143,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="419" TextChanged="TextBox_TextChanged"/>
-                    <Label Content="Wyszukaj użytkownika" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbSearchAccount" HorizontalAlignment="Left" Height="23" Margin="143,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="419" TextChanged="TextBox_TextChanged"/>
+                    <Label Content="Wyszukaj użytkownika" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Dodaj/usuń kurs">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
             <TabItem Header="Zarządzaj kursami">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="listViewCoursesAdd" HorizontalAlignment="Left" Height="321" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewCoursesAdd_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CourseId}" />
+                                <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Title}" />
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" />
+                                <GridViewColumn Header="Prowadzący" DisplayMemberBinding="{Binding LeadingTeacher.LastName}" />
+                                <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Description}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <GroupBox Header="Konto" HorizontalAlignment="Left" Height="331" Margin="567,0,0,0" VerticalAlignment="Top" Width="230" BorderThickness="1" BorderBrush="Black">
+                        <Grid Margin="0,0,0,0">
+                            <TextBox x:Name="tbCourseName" HorizontalAlignment="Left" Height="23" Margin="88,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Title, Mode=OneWay}" TabIndex="1"/>
+                            <Label Content="Nazwa" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Status" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Prowądzący" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.664,1.931"/>
+                            <ComboBox x:Name="cbCourseStatus" HorizontalAlignment="Left" Margin="88,38,0,0" VerticalAlignment="Top" Width="120" TabIndex="2" IsEditable="True" IsReadOnly="True" Text="{Binding Status, Mode=OneWay}">
+                                <ComboBoxItem Content="New"/>
+                                <ComboBoxItem Content="In progress"/>
+                                <ComboBoxItem Content="Finished"/>
+                            </ComboBox>
+                            <Label Content="Opis:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbCourseDescription" HorizontalAlignment="Left" Height="151" Margin="10,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Text="{Binding Description, Mode=OneWay}" TabIndex="8"/>
+                            <ComboBox x:Name="cbLeadingTeacher" SelectedValuePath="AccountId" DisplayMemberPath="LastName" HorizontalAlignment="Left" Margin="88,66,0,0" VerticalAlignment="Top" Width="120" TabIndex="3" IsEditable="True" IsReadOnly="True" Text="{Binding LeadingTeacher.LastName, Mode=OneWay}"></ComboBox>
+                            <Button x:Name="btLessonsManagement" Content="Terminy zajęć" HorizontalAlignment="Left" Margin="0,274,0,0" VerticalAlignment="Top" Width="105" Height="34" Click="btLessonsManagement_Click"/>
+                            <Button x:Name="btStudentsManagement" Content="Lista uczestników" HorizontalAlignment="Left" Margin="113,274,0,0" VerticalAlignment="Top" Width="105" Height="34" Click="btStudentsManagement_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <Label Content="Wyszukaj kurs" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbSearchCourseAdd" HorizontalAlignment="Left" Height="23" Margin="95,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" TextChanged="tbSearchCourseAdd_TextChanged"/>
+                    <Button x:Name="btAddCourse" Content="Dodaj" HorizontalAlignment="Left" Margin="567,338,0,0" VerticalAlignment="Top" Width="75" Click="btAddCourse_Click"/>
+                    <Button x:Name="btEditCourse" Content="Zapisz" HorizontalAlignment="Left" Margin="647,338,0,0" VerticalAlignment="Top" Width="75" Click="btEditCourse_Click"/>
+                    <Button x:Name="btRemoveCourse" Content="Usuń" HorizontalAlignment="Left" Margin="727,338,0,0" VerticalAlignment="Top" Width="75" Click="btRemoveCourse_Click"/>
+                    <CheckBox x:Name="checkBoxPokazZakonczone" Content="wyświetl zakończone kursy" HorizontalAlignment="Left" Margin="385,341,0,0" VerticalAlignment="Top" Width="177" Click="checkBoxPokazZakonczone_Click"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Zapisz się na kurs">
                 <Grid Background="#FFE5E5E5"/>

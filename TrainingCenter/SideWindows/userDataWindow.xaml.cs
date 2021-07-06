@@ -91,7 +91,7 @@ namespace TrainingCenter.SideWindows
             }
             else
             {
-                db.addAccount(newAcc);
+                db.addObjToDB(newAcc);
                 MessageBox.Show("Konto utworzono", "Sukces");
                 this.Close();
             }
@@ -123,7 +123,7 @@ namespace TrainingCenter.SideWindows
                     }
                     editedAccount.SignUpDate = logAcc.SignUpDate;
                     editedAccount.AccountId = logAcc.AccountId;
-                    db.editAccount(editedAccount);
+                    db.editObjInDB(editedAccount);
                     MessageBox.Show("Pomyślnie zmieniono dane!");
                     this.Close();
                 }
