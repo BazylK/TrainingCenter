@@ -80,8 +80,8 @@
             </TabItem>
         </TabControl>
         <Label x:Name="lbWelcomeMessage" Content="powitalnawiadomosc" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="713,10,0,0" VerticalAlignment="Top" Width="99" Height="32"/>
-        <Button Content="Edytuj dane" HorizontalAlignment="Left" Margin="609,10,0,0" VerticalAlignment="Top" Width="99" Height="32"/>
+        <Button x:Name="byLogOut" Content="Wyloguj" HorizontalAlignment="Left" Margin="713,10,0,0" VerticalAlignment="Top" Width="99" Height="32" Click="byLogOut_Click"/>
+        <Button x:Name="btEditData" Content="Edytuj dane" HorizontalAlignment="Left" Margin="609,10,0,0" VerticalAlignment="Top" Width="99" Height="32" Click="btEditData_Click"/>
 
     </Grid>
 </Window>

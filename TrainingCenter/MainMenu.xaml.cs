@@ -15,6 +15,7 @@ using TrainingCenter.DAL;
 using TrainingCenter.AdditionalClasses;
 using TrainingCenter.Model;
 using System.Collections.ObjectModel;
+using TrainingCenter.SideWindows;
 
 namespace TrainingCenter
 {
@@ -123,6 +124,19 @@ namespace TrainingCenter
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
            searchAccount();
+        }
+
+        private void byLogOut_Click(object sender, RoutedEventArgs e)
+        {//wylogowanie
+            MainWindow newWindow = new MainWindow();
+            this.Close();
+            newWindow.Show();
+        }
+
+        private void btEditData_Click(object sender, RoutedEventArgs e)
+        {//zmiej swoje dane
+            userDataWindow uDW = new userDataWindow();
+            uDW.ShowDialog();
         }
     }
 }

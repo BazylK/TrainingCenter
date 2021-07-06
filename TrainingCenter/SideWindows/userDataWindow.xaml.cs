@@ -23,24 +23,33 @@ namespace TrainingCenter.SideWindows
     public partial class userDataWindow : Window
     {
         DatabaseManager db;
+        String emailBefore; //zapisuje poprzedni email zeby wiedziec czy jest inny
+        Account logAcc;
 
         public userDataWindow()
         {
-            if (MainWindow.zalogowany ==true)
-            { 
+            InitializeComponent();
+            db = new DatabaseManager();
+            FillTextBoxes();
+        }
+
+        void FillTextBoxes()
+        {
+            if (MainWindow.zalogowany == true)
+            {
                 this.Title = "Zmiana danych";
-                lbTitle.Content = "Zmień swoje dane osobowe";
-                Account logAcc = db.findAccountWithEmail(MainWindow.logedInAccount.Email);
+                btCreate.Content = "Zapisz";
+                lbTitle.Content = "Zmień dane swojego konta";
+                logAcc = db.findAccountWithEmail(MainWindow.logedInAccount.Email);
                 tbEmail.Text = logAcc.Email;
                 tbFirstName.Text = logAcc.FirstName;
                 tbLastName.Text = logAcc.LastName;
+                tbStreet.Text = logAcc.AdressStreet;
+                tbHouseNr.Text = logAcc.AdressNumber;
+                tbCity.Text = logAcc.City;
+                tbCountry.Text = logAcc.Country;
+                emailBefore = logAcc.Email;
             }
-            else
-            {
-
-            }
-            InitializeComponent();
-            db = new DatabaseManager();
         }
 
          Account createAccountFromTB()
@@ -92,6 +101,32 @@ namespace TrainingCenter.SideWindows
         {
             if (MainWindow.zalogowany==true) //jak zalogowany to edytuje dane, jak nie to tworzy
             {
+                Account editedAccount = createAccountFromTB();
+                if (tbPassword1.Password != tbPassword2.Password)
+                {
+                    MessageBox.Show("Hasła muszą być takie same", "Błąd");
+                    
+                }
+                else if (tbEmail.Text != emailBefore && !db.isEmailAvailable(tbEmail.Text))
+                {
+                    MessageBox.Show("Email jest zajęty", "Błąd");
+                }
+                else
+                {
+                    if (tbPassword1.Password!=null)
+                    {
+                        editedAccount.Password = PasswordHasher.Hash(tbPassword1.Password);
+                    }
+                    else
+                    {
+                        editedAccount.Password = logAcc.Password;
+                    }
+                    editedAccount.SignUpDate = logAcc.SignUpDate;
+                    editedAccount.AccountId = logAcc.AccountId;
+                    db.editAccount(editedAccount);
+                    MessageBox.Show("Pomyślnie zmieniono dane!");
+                    this.Close();
+                }
 
             }
             else

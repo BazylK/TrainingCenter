@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="Rejestracja" Height="409.552" Width="339.069" ResizeMode="NoResize">
     <Grid>
-        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="137,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding Email, Mode=TwoWay}" TabIndex="1"/>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="137,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="1"/>
 
-        <TextBox x:Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="137,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding FirstName, Mode=TwoWay}" TabIndex="4"/>
-        <TextBox x:Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="137,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding LastName, Mode=TwoWay}" TabIndex="5"/>
-        <TextBox x:Name="tbStreet" HorizontalAlignment="Left" Height="23" Margin="137,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding AdressStreet, Mode=TwoWay}" TabIndex="6"/>
-        <TextBox x:Name="tbHouseNr" HorizontalAlignment="Left" Height="23" Margin="137,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding AdressNumber, Mode=TwoWay}" TabIndex="7"/>
-        <TextBox x:Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="137,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding City, Mode=TwoWay}" TabIndex="8"/>
-        <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Height="23" Margin="137,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Text="{Binding Country, Mode=TwoWay}" TabIndex="9"/>
+        <TextBox x:Name="tbFirstName" HorizontalAlignment="Left" Height="23" Margin="137,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="4"/>
+        <TextBox x:Name="tbLastName" HorizontalAlignment="Left" Height="23" Margin="137,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="5"/>
+        <TextBox x:Name="tbStreet" HorizontalAlignment="Left" Height="23" Margin="137,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="6"/>
+        <TextBox x:Name="tbHouseNr" HorizontalAlignment="Left" Height="23" Margin="137,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="7"/>
+        <TextBox x:Name="tbCity" HorizontalAlignment="Left" Height="23" Margin="137,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="8"/>
+        <TextBox x:Name="tbCountry" HorizontalAlignment="Left" Height="23" Margin="137,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" TabIndex="9"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="35,49,0,0" VerticalAlignment="Top" Width="52"/>
         <Label x:Name="lbPass1" Content="Nowe hasło" HorizontalAlignment="Left" Margin="35,78,0,0" VerticalAlignment="Top" Width="79"/>
         <Label x:Name="lbPass2" Content="Powtórz hasło" HorizontalAlignment="Left" Margin="35,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.664,1.931" Width="97"/>
