@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainMenu" Height="476.828" Width="830.069">
     <Grid>
-        <TabControl Margin="0,49,0,0" >
-            <TabItem Header="Welcome">
+        <TabControl x:Name="tabControlMain" Margin="0,49,0,0" >
+            <TabItem x:Name="tabWelcome" Header="Welcome">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Konta użytkowników">
+            <TabItem x:Name="tabAccounts" Header="Konta użytkowników">
                 <Grid Background="#FFE5E5E5">
                     <GroupBox Header="Konto" HorizontalAlignment="Left" Height="333" Margin="567,0,0,0" VerticalAlignment="Top" Width="230" BorderThickness="1" BorderBrush="Black">
                         <Grid Margin="0,0,0,0">
@@ -63,7 +63,7 @@
                     <Label Content="Wyszukaj użytkownika" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Zarządzaj kursami">
+            <TabItem x:Name="tabCourses" Header="Zarządzaj kursami">
                 <Grid Background="#FFE5E5E5">
                     <ListView x:Name="listViewCoursesAdd" HorizontalAlignment="Left" Height="321" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewCoursesAdd_SelectionChanged">
                         <ListView.View>

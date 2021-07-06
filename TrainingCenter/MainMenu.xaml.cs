@@ -43,6 +43,18 @@ namespace TrainingCenter
 
             refreshAccountList();
             refreshCoursesAddList();
+            SetUIElements();
+        }
+
+        void SetUIElements()
+        {
+            if (MainWindow.logedInAccount.AccountType=="Teacher")
+            {
+                tabAccounts.Visibility = Visibility.Collapsed;
+                btAddCourse.IsEnabled = false;
+                btEditCourse.IsEnabled = false;
+                btRemoveCourse.IsEnabled = false;
+            }
         }
         /// <summary>
         /// ZARZADZANIE KONTAMI TAB1
@@ -157,7 +169,15 @@ namespace TrainingCenter
         /// </summary>
         void refreshCoursesAddList()
         {
-            listCourses = new ObservableCollection<Course>(db.getCourseList());
+            if (MainWindow.logedInAccount.AccountType == "Admin")
+            {
+                listCourses = new ObservableCollection<Course>(db.getCourseList());
+            }
+            else if(MainWindow.logedInAccount.AccountType == "Teacher")
+            {
+                listCourses = new ObservableCollection<Course>(db.getCourseList
+                    (MainWindow.logedInAccount.Email));
+            }
             searchCourseAdd();
         }
         void searchCourseAdd()

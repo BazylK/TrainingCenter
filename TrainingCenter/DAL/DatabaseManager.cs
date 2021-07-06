@@ -57,6 +57,11 @@ namespace TrainingCenter.DAL
             var courses = (from p in db.Courses select p).ToList();
             return courses;
         }
+        public List<Course> getCourseList(string email)
+        {
+            var courses = (from p in db.Courses where p.LeadingTeacher.Email == email select p).ToList();
+            return courses;
+        }
         public void addObjToDB(Course course)
         {
             db.Courses.Add(course);
