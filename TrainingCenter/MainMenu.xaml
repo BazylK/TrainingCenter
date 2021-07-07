@@ -102,12 +102,36 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Zapisz się na kurs">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="listBoxCoursesSignUp" ItemsSource="{Binding listCourses}" HorizontalAlignment="Left" Height="351" Margin="10,10,0,0" VerticalAlignment="Top" Width="572" SelectionChanged="listBoxCoursesSignUp_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="0,0">
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="24"  />
+                                        <TextBlock FontStyle="Italic" Margin="3,0">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Prowadzący zajęcia: {0} {1}">
+                                                    <Binding Path="LeadingTeacher.LastName" />
+                                                    <Binding Path="LeadingTeacher.FirstName" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" MaxWidth="500" Margin="3,5"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="Zapisz się!" HorizontalAlignment="Left" Margin="597,293,0,0" VerticalAlignment="Top" Width="211" Height="68" FontSize="36"/>
+                    <TextBox x:Name="tbRequestNote" HorizontalAlignment="Left" Height="248" Margin="597,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" IsEnabled="False"/>
+                    <Label Content="Dodatkowe informacje (opcjonalne):" HorizontalAlignment="Left" Margin="597,14,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Moje kursy">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Najbliższe zajęcia">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>

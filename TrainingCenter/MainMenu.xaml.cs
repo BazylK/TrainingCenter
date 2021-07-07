@@ -45,6 +45,7 @@ namespace TrainingCenter
             refreshAccountList();
             refreshCoursesAddList();
             SetUIElements();
+            listBoxCoursesSignUp.ItemsSource = listCourses;
         }
 
         void SetUIElements()
@@ -255,9 +256,12 @@ namespace TrainingCenter
 
         private void listViewCoursesAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedCourse = listViewCoursesAdd.SelectedItem as Course;
-            this.DataContext = selectedCourse;
-            courseManagementId = selectedCourse.CourseId;
+            if (listViewCoursesAdd.SelectedValue != null)
+            {
+                selectedCourse = listViewCoursesAdd.SelectedItem as Course;
+                this.DataContext = selectedCourse;
+                courseManagementId = selectedCourse.CourseId;
+            }
         }
 
         private void tbSearchCourseAdd_TextChanged(object sender, TextChangedEventArgs e)
@@ -271,7 +275,15 @@ namespace TrainingCenter
 
         private void btLessonsManagement_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listViewCoursesAdd.SelectedValue != null)
+            {
+                LessonsManagement lmWindow = new LessonsManagement();
+                lmWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Zaznacz kurs żeby sprawdzić listę zajęć", "Błąd");
+            }
         }
 
         private void btStudentsManagement_Click(object sender, RoutedEventArgs e)
@@ -284,6 +296,14 @@ namespace TrainingCenter
             else
             {
                 MessageBox.Show("Zaznacz kurs żeby sprawdzić listę uczestników", "Błąd");
+            }
+        }
+
+        private void listBoxCoursesSignUp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBoxCoursesSignUp.SelectedValue !=null)
+            {
+                tbNotes.IsEnabled = true;
             }
         }
     }
