@@ -68,6 +68,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AdditionalClasses\DataCheck.cs" />
+    <Compile Include="SideWindows\LessonsManagement.xaml.cs">
+      <DependentUpon>LessonsManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SideWindows\StudentsManagment.xaml.cs">
+      <DependentUpon>StudentsManagment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SideWindows\userDataWindow.xaml.cs">
       <DependentUpon>userDataWindow.xaml</DependentUpon>
     </Compile>
@@ -95,6 +101,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SideWindows\LessonsManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SideWindows\StudentsManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SideWindows\userDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

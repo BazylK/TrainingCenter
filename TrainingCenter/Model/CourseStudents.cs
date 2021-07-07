@@ -15,5 +15,6 @@ namespace TrainingCenter.Model
 
         [StringLength(100)]
         public string Status { get; set; }
+        public string Notes { get; set; }
     }
 }

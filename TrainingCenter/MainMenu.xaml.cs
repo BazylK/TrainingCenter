@@ -33,6 +33,7 @@ namespace TrainingCenter
 
 
         DatabaseManager db;
+        public static int courseManagementId;
 
         public MainMenu()
         {
@@ -256,6 +257,7 @@ namespace TrainingCenter
         {
             selectedCourse = listViewCoursesAdd.SelectedItem as Course;
             this.DataContext = selectedCourse;
+            courseManagementId = selectedCourse.CourseId;
         }
 
         private void tbSearchCourseAdd_TextChanged(object sender, TextChangedEventArgs e)
@@ -274,7 +276,15 @@ namespace TrainingCenter
 
         private void btStudentsManagement_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listViewCoursesAdd.SelectedValue != null)
+            {
+                StudentsManagment smWindow = new StudentsManagment();
+                smWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Zaznacz kurs żeby sprawdzić listę uczestników", "Błąd");
+            }
         }
     }
 }

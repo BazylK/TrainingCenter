@@ -1,0 +1,55 @@
+﻿<Window x:Class="TrainingCenter.SideWindows.StudentsManagment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainingCenter.SideWindows"
+        mc:Ignorable="d"
+        Title="Zarządzania uczestnikami" Height="450" Width="800">
+    <Grid>
+        <GroupBox Header="Zapisy użytkowników" HorizontalAlignment="Left" Height="178" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
+            <Grid>
+                <ListView x:Name="listViewPendingSignUps" HorizontalAlignment="Left" Height="135" Margin="10,10,0,0" VerticalAlignment="Top" Width="660" SelectionChanged="listViewPendingSignUps_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Student.FirstName}" />
+                            <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding Student.LastName}" />
+                            <GridViewColumn Header="Notka" DisplayMemberBinding="{Binding Notes}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="btAccept" Content="Akceptuj" HorizontalAlignment="Left" Margin="675,10,0,0" VerticalAlignment="Top" Width="75" Height="50" Click="btAccept_Click"/>
+                <Button x:Name="btDecline" Content="Odrzuć" HorizontalAlignment="Left" Margin="675,95,0,0" VerticalAlignment="Top" Width="75" Height="50" Click="btDecline_Click"/>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Dodaj własnych" HorizontalAlignment="Left" Height="216" Margin="10,193,0,0" VerticalAlignment="Top" Width="772">
+            <Grid>
+                <ListView x:Name="listViewUsersList" HorizontalAlignment="Left" Height="146" Margin="10,13,0,0" VerticalAlignment="Top" Width="357" SelectionChanged="listViewUsersList_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding FirstName}" />
+                            <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding LastName}" />
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="listViewUsersInCourse" HorizontalAlignment="Left" Height="173" Margin="452,10,0,0" VerticalAlignment="Top" Width="298" SelectionChanged="listViewUsersInCourse_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Student.FirstName}" />
+                            <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding Student.LastName}" />
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Student.Email}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="btAddToCourse" Content="&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="372,37,0,0" VerticalAlignment="Top" Width="75" Height="50" RenderTransformOrigin="0.486,0.28" Click="btAddToCourse_Click"/>
+                <Button x:Name="btRemoveFromCourse" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="372,109,0,0" VerticalAlignment="Top" Width="75" Height="50" Click="btRemoveFromCourse_Click"/>
+                <Label Content="Wyszukaj" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbSearch" HorizontalAlignment="Left" Height="23" Margin="74,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" TextChanged="tbSearch_TextChanged"/>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

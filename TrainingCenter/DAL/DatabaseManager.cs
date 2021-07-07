@@ -56,12 +56,12 @@ namespace TrainingCenter.DAL
         {
             var courses = (from p in db.Courses select p).ToList();
             return courses;
-        }
+        }//zwraca wszystkie kursy
         public List<Course> getCourseList(string email)
         {
             var courses = (from p in db.Courses where p.LeadingTeacher.Email == email select p).ToList();
             return courses;
-        }
+        }//zwraca kursy dla danego uzytkownika
         public void addObjToDB(Course course)
         {
             db.Courses.Add(course);
@@ -76,6 +76,44 @@ namespace TrainingCenter.DAL
         {
             db.Courses.AddOrUpdate(course);
             db.SaveChanges();
+        }
+        public Course getCourseWithId(int courseID)
+        {
+            Course course;
+            course = db.Courses.First(a => a.CourseId == courseID);
+            //course = (Course)(from p in db.Courses where p.CourseId == courseID select p);
+            return course;
+        }
+        public List<CourseStudents> getCourseStudentsList(int courseID)
+        {
+            var coursestudents = (from p in db.CourseStudentsTable where p.Course.CourseId==courseID select p).ToList();
+            return coursestudents;
+        }
+        public void addObjToDB(CourseStudents cs)
+        {
+            db.CourseStudentsTable.Add(cs);
+            db.SaveChanges();
+        }
+        public void removeObjFromDB(CourseStudents cs)
+        {
+            db.CourseStudentsTable.Remove(cs);
+            db.SaveChanges();
+        }
+        public void editObjInDB(CourseStudents cs)
+        {
+            db.CourseStudentsTable.AddOrUpdate(cs);
+            db.SaveChanges();
+        }
+        public void removeSignUpIfExists(Course course,Account acc)
+        {
+            CourseStudents cs = db.CourseStudentsTable.FirstOrDefault
+                (a => a.Course.CourseId == course.CourseId &&
+                a.Student.AccountId == acc.AccountId);
+            if (cs != null)
+            {
+                db.CourseStudentsTable.Remove(cs);
+                db.SaveChanges();
+            }
         }
     }
 }
