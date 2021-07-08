@@ -82,19 +82,19 @@ namespace TrainingCenter.DAL
 
             var lessons = new List<Lesson>
             {
-                new Lesson{CourseLesson=courses[0],TeacherLesson=users[1],RoomNr="100",
+                new Lesson{CourseLesson=courses[0],RoomNr="100",
                     LessonStart=new DateTime(2021,7,10,8,30,00),
                     LessonEnd=new DateTime(2021,7,10,10,30,00)},
-                new Lesson{CourseLesson=courses[0],TeacherLesson=users[1],RoomNr="100",
+                new Lesson{CourseLesson=courses[0],RoomNr="100",
                     LessonStart=new DateTime(2021,7,12,8,30,00),
                     LessonEnd=new DateTime(2021,7,12,10,30,00)},
-                new Lesson{CourseLesson=courses[0],TeacherLesson=users[2],RoomNr="101",
+                new Lesson{CourseLesson=courses[0],RoomNr="101",
                     LessonStart=new DateTime(2021,7,14,8,30,00),
                     LessonEnd=new DateTime(2021,7,14,10,30,00)},
-                new Lesson{CourseLesson=courses[0],TeacherLesson=users[2],RoomNr="101",
+                new Lesson{CourseLesson=courses[0],RoomNr="101",
                     LessonStart=new DateTime(2021,7,16,8,30,00),
                     LessonEnd=new DateTime(2021,7,10,16,30,00)},
-                new Lesson{CourseLesson=courses[0],TeacherLesson=users[2],RoomNr="101",
+                new Lesson{CourseLesson=courses[0],RoomNr="101",
                     LessonStart=new DateTime(2021,7,18,8,30,00),
                     LessonEnd=new DateTime(2021,7,18,10,30,00)},
             };

@@ -11,7 +11,6 @@ namespace TrainingCenter.Model
     {
         public int LessonId { get; set; }
         public Course CourseLesson { get; set; }
-        public Account TeacherLesson { get; set; }
         [StringLength(100)]
         public string RoomNr { get; set; }
         public DateTime LessonStart { get; set; }

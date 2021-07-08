@@ -7,6 +7,68 @@
         mc:Ignorable="d"
         Title="LessonsManagement" Height="450" Width="800">
     <Grid>
-        
+        <ListView x:Name="listViewLessons" HorizontalAlignment="Left" Height="266" Margin="10,10,0,0" VerticalAlignment="Top" Width="324">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Dzień">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}/{1}/{2}">
+                                            <Binding Path="LessonStart.Day"></Binding>
+                                            <Binding Path="LessonStart.Month"></Binding>
+                                            <Binding Path="LessonStart.Year"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Rozpoczęcie">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}:{1}">
+                                            <Binding Path="LessonStart.Hour"></Binding>
+                                            <Binding Path="LessonStart.Minute"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Zakończenie">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}:{1}">
+                                            <Binding Path="LessonEnd.Hour"></Binding>
+                                            <Binding Path="LessonEnd.Minute"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Numer pokoju" DisplayMemberBinding="{Binding Path=RoomNr}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Viewbox HorizontalAlignment="Left" Height="399" Margin="350,10,0,0" VerticalAlignment="Top" Width="432">
+            <Calendar/>
+        </Viewbox>
+        <Button x:Name="btAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="15,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btSave" Content="Zapisz" HorizontalAlignment="Left" Margin="95,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btRemove" Content="Usuń" HorizontalAlignment="Left" Margin="175,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <DatePicker x:Name="datePickerStartTime" HorizontalAlignment="Left" Height="23" Margin="95,317,0,0" VerticalAlignment="Top" Width="120" SelectedDate="{Binding TimeDeparture.Date, Mode=OneWay}"/>
+        <TextBox x:Name="tbRoomNr" HorizontalAlignment="Left" Height="23" Margin="95,289,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="80,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="115,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="185,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="215,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.634,0.357" PreviewTextInput="TextBox_PreviewTextInput"/>
+
     </Grid>
 </Window>

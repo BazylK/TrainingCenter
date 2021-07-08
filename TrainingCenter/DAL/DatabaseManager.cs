@@ -134,12 +134,16 @@ namespace TrainingCenter.DAL
                 db.SaveChanges();
             }
         }
-
         public bool isUserSignedUpAlready(int courseID, int accountID)
         {
             bool b = db.CourseStudentsTable.Any(a => a.Course.CourseId == courseID &&
             a.Student.AccountId == accountID && (a.Status == "signed_up" || a.Status == "approved"));
             return b;
+        }
+        public List<Lesson> getLessonsForCourse(int courseID)
+        {
+            var lessons = (from p in db.Lessons where p.CourseLesson.CourseId == courseID select p).ToList();
+            return lessons;
         }
     }
 }
