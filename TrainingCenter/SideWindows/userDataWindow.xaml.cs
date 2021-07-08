@@ -40,7 +40,7 @@ namespace TrainingCenter.SideWindows
                 this.Title = "Zmiana danych";
                 btCreate.Content = "Zapisz";
                 lbTitle.Content = "Zmień dane swojego konta";
-                logAcc = db.findAccountWithEmail(MainWindow.logedInAccount.Email);
+                logAcc = db.getAccountWithEmail(MainWindow.logedInAccount.Email);
                 tbEmail.Text = logAcc.Email;
                 tbFirstName.Text = logAcc.FirstName;
                 tbLastName.Text = logAcc.LastName;

@@ -38,7 +38,7 @@ namespace TrainingCenter
         {
             if (db.isAccountInDatabase(tbEmail.Text))
             {
-                Account accountCheck = db.findAccountWithEmail(tbEmail.Text);
+                Account accountCheck = db.getAccountWithEmail(tbEmail.Text);
                 if (PasswordHasher.Verify(pbPassword.Password, accountCheck.Password))
                 {
                     zalogowany = true;

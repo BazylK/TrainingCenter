@@ -52,7 +52,7 @@ namespace TrainingCenter.SideWindows
                 (db.getAccountList().Where(x => x.AccountType.Equals("Student")));
             foreach (CourseStudents item in listCSApproved.ToList())
             {
-                Account acc = listStudents.First(a => a.Email == item.Student.Email);
+                Account acc = listStudents.FirstOrDefault(a => a.Email == item.Student.Email);
                 listStudents.Remove(acc);
             }
             listViewPendingSignUps.ItemsSource = listCSsignedUp;

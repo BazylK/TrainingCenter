@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TrainingCenter.Model;
 
 namespace TrainingCenter.DAL
@@ -29,8 +30,15 @@ namespace TrainingCenter.DAL
         }
         public void removeObjFromDB(Account account)
         {
-            db.Accounts.Remove(account);
-            db.SaveChanges();
+            try
+            {
+                db.Accounts.Remove(account);
+                db.SaveChanges();
+            }
+            catch 
+            {
+                MessageBox.Show("Nie można usunąć użytkownika używanego w kursach", "Błąd");
+            }
         }
         public void editObjInDB(Account account)
         {
@@ -47,9 +55,15 @@ namespace TrainingCenter.DAL
         {
             return db.Accounts.Any(o => o.Email == email);
         }
-        public Account findAccountWithEmail(string email)
+        public Account getAccountWithEmail(string email)
         {
-            Account emailAccount = db.Accounts.Single(o => o.Email == email);
+            Account emailAccount = db.Accounts.First(o => o.Email == email);
+            return emailAccount;
+        }
+
+        public Account getAccountWithId (int accId)
+        {
+            Account emailAccount = db.Accounts.Single(o => o.AccountId == accId);
             return emailAccount;
         }
         public List<Course> getCourseList()
@@ -61,7 +75,12 @@ namespace TrainingCenter.DAL
         {
             var courses = (from p in db.Courses where p.LeadingTeacher.Email == email select p).ToList();
             return courses;
-        }//zwraca kursy dla danego uzytkownika
+        }//zwraca kursy ktore dany user prowadzi
+        public List<CourseStudents> getMyCourses (string email)
+        {
+            var courses = (from p in db.CourseStudentsTable where p.Student.Email == email select p).ToList();
+            return courses;
+        }
         public void addObjToDB(Course course)
         {
             db.Courses.Add(course);
@@ -114,6 +133,13 @@ namespace TrainingCenter.DAL
                 db.CourseStudentsTable.Remove(cs);
                 db.SaveChanges();
             }
+        }
+
+        public bool isUserSignedUpAlready(int courseID, int accountID)
+        {
+            bool b = db.CourseStudentsTable.Any(a => a.Course.CourseId == courseID &&
+            a.Student.AccountId == accountID && (a.Status == "signed_up" || a.Status == "approved"));
+            return b;
         }
     }
 }

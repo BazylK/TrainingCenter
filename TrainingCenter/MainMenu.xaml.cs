@@ -23,13 +23,18 @@ namespace TrainingCenter
     {
         Account selectedAccount;
         Course selectedCourse;
+        Course selectedCourseToSign;
 
         ObservableCollection<Account> listAccounts;
         ObservableCollection<Account> listAccountsSearch;
         ObservableCollection<Account> listTeachers;
         ObservableCollection<Course> listCourses;
+        ObservableCollection<Course> listCoursesToSignUp;
         ObservableCollection<Course> listCoursesAddSearch1;
         ObservableCollection<Course> listCoursesAddSearch2;
+        ObservableCollection<CourseStudents> listMyCourses;
+        ObservableCollection<Lesson> listMyLessons;
+
 
 
         DatabaseManager db;
@@ -40,16 +45,18 @@ namespace TrainingCenter
             InitializeComponent();
             db = new DatabaseManager();
 
-            lbWelcomeMessage.Content = "Witaj ponownie, " + MainWindow.logedInAccount.FirstName + " " + MainWindow.logedInAccount.LastName + "!";
+            
 
             refreshAccountList();
             refreshCoursesAddList();
             SetUIElements();
-            listBoxCoursesSignUp.ItemsSource = listCourses;
         }
 
         void SetUIElements()
         {
+            lbWelcomeMessage.Content = "Witaj ponownie, " + 
+                MainWindow.logedInAccount.FirstName + " " + 
+                MainWindow.logedInAccount.LastName + "!";
             if (MainWindow.logedInAccount.AccountType=="Teacher")
             {
                 tabAccounts.Visibility = Visibility.Collapsed;
@@ -63,12 +70,15 @@ namespace TrainingCenter
         /// </summary>
         void refreshAccountList()
         {
+            //lista kont glowna
             listAccounts = new ObservableCollection<Account>(db.getAccountList());
-            listViewAccounts.ItemsSource = listAccounts;
-            // pobieram z listy kont liste nauczucieli i lacze imie+nazwisko do wyswietlania
+
+            // pobieram z listy kont liste nauczucieli zeby je mozna wybrac w comboboxie
             listTeachers = new ObservableCollection<Account>(listAccounts.Where
                 (x => x.AccountType.Equals("Teacher") || x.AccountType.Equals("Admin")));
+
             cbLeadingTeacher.ItemsSource = listTeachers;
+            listViewAccounts.ItemsSource = listAccounts;
             searchAccount();
         } //odswieza listview z kontami
 
@@ -171,15 +181,30 @@ namespace TrainingCenter
         /// </summary>
         void refreshCoursesAddList()
         {
+            //lista kursow na ktore sie mozna zapisac do zakladki kursy zapisz sie
+            listCoursesToSignUp = new ObservableCollection<Course>(db.getCourseList());
             if (MainWindow.logedInAccount.AccountType == "Admin")
-            {
+            { //lista kursow dla admina (wszystkie)
                 listCourses = new ObservableCollection<Course>(db.getCourseList());
             }
             else if(MainWindow.logedInAccount.AccountType == "Teacher")
+            {//lista kursow dla nauczyciela (tylko te ktore prowadzi)
+                listCourses = new ObservableCollection<Course>(db.getCourseList
+                    (MainWindow.logedInAccount.Email));
+
+                //w zakladcie MojeKursy nauczuciel widzi te ktore prowadzi
+                listBoxCoursesMyCourses.ItemsSource = listCourses;
+            }
+            else if (MainWindow.logedInAccount.AccountType == "Student")
             {
                 listCourses = new ObservableCollection<Course>(db.getCourseList
                     (MainWindow.logedInAccount.Email));
+                listMyCourses = new ObservableCollection<CourseStudents>(
+                    db.getMyCourses(MainWindow.logedInAccount.Email));
+                listBoxCoursesMyCourses.ItemsSource = listMyCourses;
             }
+
+            listBoxCoursesSignUp.ItemsSource = listCoursesToSignUp;
             searchCourseAdd();
         }
         void searchCourseAdd()
@@ -303,7 +328,32 @@ namespace TrainingCenter
         {
             if (listBoxCoursesSignUp.SelectedValue !=null)
             {
-                tbNotes.IsEnabled = true;
+                selectedCourseToSign = listBoxCoursesSignUp.SelectedItem as Course;
+                tbRequestNote.IsEnabled = true;
+            }
+            else
+            {
+                tbRequestNote.IsEnabled = false;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (db.isUserSignedUpAlready(selectedCourseToSign.CourseId, MainWindow.logedInAccount.AccountId))
+            {
+                MessageBox.Show("Już jesteś zapisany/a na ten kurs", "Błąd");
+            }
+            else
+            {
+                CourseStudents newCS = new CourseStudents
+                {
+                    Course = selectedCourseToSign,
+                    Student = db.getAccountWithId(MainWindow.logedInAccount.AccountId),
+                    Status = "signed_up",
+                    Notes = tbRequestNote.Text,
+                };
+                db.addObjToDB(newCS);
+                MessageBox.Show("Wysłano zgłoszenie na kurs");
             }
         }
     }
