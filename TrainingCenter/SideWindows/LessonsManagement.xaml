@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrainingCenter.SideWindows"
         mc:Ignorable="d"
-        Title="LessonsManagement" Height="460.375" Width="818.156">
+        Title="Zarządzanie zajęciami" Height="460.375" Width="818.156">
     <Window.Resources>
         <Style x:Key="cdbStyle" TargetType="CalendarDayButton">
             <Style.Triggers>

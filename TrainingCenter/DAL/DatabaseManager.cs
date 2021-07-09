@@ -60,7 +60,6 @@ namespace TrainingCenter.DAL
             Account emailAccount = db.Accounts.First(o => o.Email == email);
             return emailAccount;
         }
-
         public Account getAccountWithId (int accId)
         {
             Account emailAccount = db.Accounts.Single(o => o.AccountId == accId);
@@ -185,8 +184,11 @@ namespace TrainingCenter.DAL
             List<Lesson> listaLekcji = new List<Lesson>();
             foreach (CourseStudents a in courses)
             {
-                var lekcje = getLessonsForCourse(a.Course.CourseId);
-                listaLekcji.AddRange(lekcje);
+                if (a.Status == "approved")
+                {
+                    var lekcje = getLessonsForCourse(a.Course.CourseId);
+                    listaLekcji.AddRange(lekcje);
+                }
             }
             listaLekcji.OrderBy(a => a.LessonStart);
             return listaLekcji;

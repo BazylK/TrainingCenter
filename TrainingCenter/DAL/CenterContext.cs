@@ -23,14 +23,6 @@ namespace TrainingCenter.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            /*modelBuilder.Entity<Course>()
-                .HasOptional(a => a.LeadingTeacher)
-                .WithOptionalDependent()
-                .WillCascadeOnDelete(true);
-            modelBuilder.Entity<CourseStudents>()
-                .HasOptional(a => a.Course)
-                .WithOptionalDependent()
-                .WillCascadeOnDelete(true);*/
         }
     }
 }

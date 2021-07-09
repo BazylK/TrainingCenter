@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrainingCenter"
         mc:Ignorable="d"
-        Title="MainMenu" Height="482.828" Width="838.069" ResizeMode="NoResize">
+        Title="Centrum szkoleniowe" Height="482.828" Width="838.069" ResizeMode="NoResize">
     <Grid>
         <TabControl x:Name="tabControlMain" Margin="0,49,0,0" >
             <TabItem x:Name="tabWelcome" Header="Welcome">
@@ -180,8 +180,9 @@
                                     <StackPanel Margin="0,0">
                                         <TextBlock FontWeight="Bold" FontSize="18">
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="Data:{0:dd/MM/yyyy} Od {0:hh}:{0:mm} Do {0:hh}:{0:mm} ">
+                                                <MultiBinding StringFormat="Data:{0:dd/MM/yyyy} Od {0:hh}:{0:mm} Do {1:hh}:{1:mm} ">
                                                     <Binding Path="LessonStart" />
+                                                    <Binding Path="LessonEnd" />
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>

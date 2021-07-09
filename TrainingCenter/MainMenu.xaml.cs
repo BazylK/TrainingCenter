@@ -410,6 +410,8 @@ namespace TrainingCenter
                 };
                 db.addObjToDB(newCS);
                 MessageBox.Show("Wysłano zgłoszenie na kurs");
+                refreshAccountList();
+                refreshCoursesAddList();
             }
         }
     }
