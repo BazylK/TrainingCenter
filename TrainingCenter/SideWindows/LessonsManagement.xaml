@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrainingCenter.SideWindows"
         mc:Ignorable="d"
-        Title="LessonsManagement" Height="450" Width="800">
+        Title="LessonsManagement" Height="460.375" Width="818.156">
+    <Window.Resources>
+        <Style x:Key="cdbStyle" TargetType="CalendarDayButton">
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <ListView x:Name="listViewLessons" HorizontalAlignment="Left" Height="266" Margin="10,10,0,0" VerticalAlignment="Top" Width="324">
+        <ListView x:Name="listViewLessons" HorizontalAlignment="Left" Height="248" Margin="10,10,0,0" VerticalAlignment="Top" Width="330" SelectionChanged="listViewLessons_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Dzień">
@@ -58,17 +64,31 @@
             </ListView.View>
         </ListView>
         <Viewbox HorizontalAlignment="Left" Height="399" Margin="350,10,0,0" VerticalAlignment="Top" Width="432">
-            <Calendar/>
+            <Calendar x:Name="calendarControl" Height="165" SelectedDatesChanged="calendarControl_SelectedDatesChanged" CalendarDayButtonStyle="{DynamicResource cdbStyle}">
+
+            </Calendar>
         </Viewbox>
-        <Button x:Name="btAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="15,389,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btSave" Content="Zapisz" HorizontalAlignment="Left" Margin="95,389,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btRemove" Content="Usuń" HorizontalAlignment="Left" Margin="175,389,0,0" VerticalAlignment="Top" Width="75"/>
-        <DatePicker x:Name="datePickerStartTime" HorizontalAlignment="Left" Height="23" Margin="95,317,0,0" VerticalAlignment="Top" Width="120" SelectedDate="{Binding TimeDeparture.Date, Mode=OneWay}"/>
-        <TextBox x:Name="tbRoomNr" HorizontalAlignment="Left" Height="23" Margin="95,289,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="80,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="115,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="185,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="215,348,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.634,0.357" PreviewTextInput="TextBox_PreviewTextInput"/>
+        <Button x:Name="btAdd" Content="Dodaj" HorizontalAlignment="Left" Margin="15,389,0,0" VerticalAlignment="Top" Width="100" Click="btAdd_Click"/>
+        <Button x:Name="btSave" Content="Zapisz" HorizontalAlignment="Left" Margin="120,389,0,0" VerticalAlignment="Top" Width="100" Click="btSave_Click"/>
+        <Button x:Name="btRemove" Content="Usuń" HorizontalAlignment="Left" Margin="225,389,0,0" VerticalAlignment="Top" Width="100" Click="btRemove_Click"/>
+        <GroupBox Header="Zajęcia" HorizontalAlignment="Left" Height="126" Margin="10,258,0,0" VerticalAlignment="Top" Width="330" BorderBrush="Black">
+            <Grid>
+                <DatePicker x:Name="datePickerLesson" HorizontalAlignment="Left" Height="23" Margin="89,41,0,0" VerticalAlignment="Top" Width="120" SelectedDate="{Binding LessonStart.Date, Mode=OneWay}" TabIndex="2"/>
+                <TextBox x:Name="tbRoomNr" HorizontalAlignment="Left" Height="23" Margin="89,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding RoomNr, Mode=OneWay}" RenderTransformOrigin="-0.46,1.437" TabIndex="1"/>
+                <TextBox x:Name="tbStartHour" Text="{Binding LessonStart.Hour, Mode=OneWay}" HorizontalAlignment="Left" Height="17" Margin="113,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput" TabIndex="3" MaxLength="2"/>
+                <TextBox x:Name="tbStartMin" Text="{Binding LessonStart.Minute, Mode=OneWay}" HorizontalAlignment="Left" Height="17" Margin="156,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput" TabIndex="4" MaxLength="2"/>
+                <TextBox x:Name="tbEndHour" Text="{Binding LessonStart.Hour, Mode=OneWay}" HorizontalAlignment="Left" Height="17" Margin="220,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" PreviewTextInput="TextBox_PreviewTextInput" TabIndex="5" MaxLength="2"/>
+                <TextBox x:Name="tbEndMin" Text="{Binding LessonStart.Minute, Mode=OneWay}" HorizontalAlignment="Left" Height="17" Margin="263,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.634,0.357" PreviewTextInput="TextBox_PreviewTextInput" TabIndex="6" MaxLength="2"/>
+                <Label Content="Sala" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Dzień" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+                <Label Content="Godzina" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                <Label Content="od" HorizontalAlignment="Left" Margin="89,69,0,0" VerticalAlignment="Top"/>
+                <Label Content=":" HorizontalAlignment="Left" Margin="143,71,0,0" VerticalAlignment="Top"/>
+                <Label Content="do" HorizontalAlignment="Left" Margin="191,69,0,0" VerticalAlignment="Top"/>
+                <Label Content=":" HorizontalAlignment="Left" Margin="250,71,0,0" VerticalAlignment="Top"/>
+
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>

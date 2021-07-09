@@ -81,6 +81,17 @@ namespace TrainingCenter.DAL
             var courses = (from p in db.CourseStudentsTable where p.Student.Email == email select p).ToList();
             return courses;
         }
+        public List<CourseStudents> getMyCourses(int accId)
+        {
+            var courses = (from p in db.CourseStudentsTable where 
+                           p.Student.AccountId == accId select p).ToList();
+            return courses;
+        }
+        public List<CourseStudents> getMyCoursesImLeading(string email)
+        {
+            var courses = (from p in db.CourseStudentsTable where p.Course.LeadingTeacher.Email == email select p).ToList();
+            return courses;
+        }
         public void addObjToDB(Course course)
         {
             db.Courses.Add(course);
@@ -144,6 +155,35 @@ namespace TrainingCenter.DAL
         {
             var lessons = (from p in db.Lessons where p.CourseLesson.CourseId == courseID select p).ToList();
             return lessons;
+        }
+        public void addObjToDB(Lesson lesson)
+        {
+            db.Lessons.Add(lesson);
+            db.SaveChanges();
+        }
+        public void removeObjFromDB(Lesson lesson)
+        {
+            db.Lessons.Remove(lesson);
+            db.SaveChanges();
+        }
+        public void editObjInDB(Lesson lesson)
+        {
+            db.Lessons.AddOrUpdate(lesson);
+            db.SaveChanges();
+        }
+        public List <Lesson> getMyLessons(int AccountId)
+        {
+            //sprawdzic na jakis kursach jestem
+            //sciagnac lessony dla kazdego kursu
+            //uporzadkowac po dacie
+            var courses = getMyCourses(AccountId);
+            List<Lesson> listaLekcji = new List<Lesson>();
+            foreach (CourseStudents a in courses)
+            {
+                var lekcje = getLessonsForCourse(a.Course.CourseId);
+                listaLekcji.AddRange(lekcje);
+            }
+            return listaLekcji;
         }
     }
 }

@@ -52,22 +52,30 @@ namespace TrainingCenter
             SetUIElements();
         }
 
+
+
         void SetUIElements()
         {
             lbWelcomeMessage.Content = "Witaj ponownie, " + 
                 MainWindow.logedInAccount.FirstName + " " + 
                 MainWindow.logedInAccount.LastName + "!";
+            if (MainWindow.logedInAccount.AccountType=="Admin")
+            {
+                listBoxCoursesMyCourses.IsEnabled = false;
+            }
             if (MainWindow.logedInAccount.AccountType=="Teacher")
             {
+                listBoxCoursesMyCourses.IsEnabled = false;
                 tabAccounts.Visibility = Visibility.Collapsed;
                 btAddCourse.IsEnabled = false;
                 btEditCourse.IsEnabled = false;
                 btRemoveCourse.IsEnabled = false;
             }
         }
-        /// <summary>
-        /// ZARZADZANIE KONTAMI TAB1
-        /// </summary>
+
+        ////////////////
+        ////Obsługa list do listview i listboxow
+        ///////////
         void refreshAccountList()
         {
             //lista kont glowna
@@ -81,6 +89,45 @@ namespace TrainingCenter
             listViewAccounts.ItemsSource = listAccounts;
             searchAccount();
         } //odswieza listview z kontami
+        /// <summary>
+        /// ZARZADZANIE KONTAMI TAB1
+        /// </summary>
+        void refreshCoursesAddList()
+        {
+            //lista kursow na ktore sie mozna zapisac do zakladki kursy zapisz sie
+            listCoursesToSignUp = new ObservableCollection<Course>(db.getCourseList());
+            if (MainWindow.logedInAccount.AccountType == "Admin")
+            { //lista kursow dla admina (wszystkie)
+                listCourses = new ObservableCollection<Course>(db.getCourseList());
+                //w zakladcie MojeKursy admin widzi te ktore prowadzi
+                //listMyCourses = new ObservableCollection<CourseStudents>
+                    //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+            }
+            else if (MainWindow.logedInAccount.AccountType == "Teacher")
+            {//lista kursow dla nauczyciela (tylko te ktore prowadzi)
+                listCourses = new ObservableCollection<Course>(db.getCourseList
+                    (MainWindow.logedInAccount.Email));
+
+                //w zakladcie MojeKursy nauczuciel widzi te ktore prowadzi
+                //listMyCourses = new ObservableCollection<CourseStudents>
+                    //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+            }
+            else if (MainWindow.logedInAccount.AccountType == "Student")
+            {
+                listCourses = new ObservableCollection<Course>(db.getCourseList
+                    (MainWindow.logedInAccount.Email));
+                listMyCourses = new ObservableCollection<CourseStudents>(
+                    db.getMyCourses(MainWindow.logedInAccount.Email));
+                listBoxCoursesMyCourses.ItemsSource = listMyCourses;
+
+            }
+
+            listMyLessons = new ObservableCollection<Lesson>(
+                db.getMyLessons(MainWindow.logedInAccount.AccountId));
+            listBoxMyLessons.ItemsSource = listMyLessons;
+            listBoxCoursesSignUp.ItemsSource = listCoursesToSignUp;
+            searchCourseAdd();
+        }
 
         private void listViewAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -179,34 +226,7 @@ namespace TrainingCenter
         /// <summary>----------------------------------------------------------------
         /// KURSY ADD/REMOVE TAB2
         /// </summary>
-        void refreshCoursesAddList()
-        {
-            //lista kursow na ktore sie mozna zapisac do zakladki kursy zapisz sie
-            listCoursesToSignUp = new ObservableCollection<Course>(db.getCourseList());
-            if (MainWindow.logedInAccount.AccountType == "Admin")
-            { //lista kursow dla admina (wszystkie)
-                listCourses = new ObservableCollection<Course>(db.getCourseList());
-            }
-            else if(MainWindow.logedInAccount.AccountType == "Teacher")
-            {//lista kursow dla nauczyciela (tylko te ktore prowadzi)
-                listCourses = new ObservableCollection<Course>(db.getCourseList
-                    (MainWindow.logedInAccount.Email));
-
-                //w zakladcie MojeKursy nauczuciel widzi te ktore prowadzi
-                listBoxCoursesMyCourses.ItemsSource = listCourses;
-            }
-            else if (MainWindow.logedInAccount.AccountType == "Student")
-            {
-                listCourses = new ObservableCollection<Course>(db.getCourseList
-                    (MainWindow.logedInAccount.Email));
-                listMyCourses = new ObservableCollection<CourseStudents>(
-                    db.getMyCourses(MainWindow.logedInAccount.Email));
-                listBoxCoursesMyCourses.ItemsSource = listMyCourses;
-            }
-
-            listBoxCoursesSignUp.ItemsSource = listCoursesToSignUp;
-            searchCourseAdd();
-        }
+        
         void searchCourseAdd()
         { //najpierw sprawdzam czy checkbox jest klikniety i filtruje wedlug niego
             if(checkBoxPokazZakonczone.IsChecked == false)
