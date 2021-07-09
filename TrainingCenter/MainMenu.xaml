@@ -9,7 +9,10 @@
     <Grid>
         <TabControl x:Name="tabControlMain" Margin="0,49,0,0" >
             <TabItem x:Name="tabWelcome" Header="Welcome">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Witam w centrum szkoleniowym &quot;Centrum Szkoleniowe&quot;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+                    <Label Content="Zapraszamy do udziału w kursach!" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="24"/>
+                </Grid>
             </TabItem>
             <TabItem x:Name="tabAccounts" Header="Konta użytkowników">
                 <Grid Background="#FFE5E5E5">
@@ -35,8 +38,10 @@
                                 <ComboBoxItem>Teacher</ComboBoxItem>
                                 <ComboBoxItem>Student</ComboBoxItem>
                             </ComboBox>
-                            <Label Content="Notki" HorizontalAlignment="Left" Margin="13,228,0,0" VerticalAlignment="Top"/>
-                            <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="70" Margin="88,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Notes, Mode=OneWay}" TabIndex="8"/>
+                            <Label Content="Notki" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.564,1.346"/>
+                            <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="40" Margin="88,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Notes, Mode=OneWay}" TabIndex="10"/>
+                            <Label Content="Hasło:" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top"/>
+                            <PasswordBox x:Name="pbUsers" HorizontalAlignment="Left" Margin="88,230,0,0" VerticalAlignment="Top" Width="120" Height="23" TabIndex="9"/>
                         </Grid>
                     </GroupBox>
                     <ListView x:Name="listViewAccounts" HorizontalAlignment="Left" Height="321" Margin="10,10,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="listViewAccounts_SelectionChanged">
@@ -175,14 +180,8 @@
                                     <StackPanel Margin="0,0">
                                         <TextBlock FontWeight="Bold" FontSize="18">
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="Data: {0}/{5}/{6}  Od {1}:{2} Do {3}:{4} ">
-                                                    <Binding Path="LessonStart.Day" />
-                                                    <Binding Path="LessonStart.Hour" />
-                                                    <Binding Path="LessonStart.Minute" />
-                                                    <Binding Path="LessonEnd.Hour" />
-                                                    <Binding Path="LessonEnd.Minute" />
-                                                    <Binding Path="LessonStart.Month" />
-                                                    <Binding Path="LessonStart.Year" />
+                                                <MultiBinding StringFormat="Data:{0:dd/MM/yyyy} Od {0:hh}:{0:mm} Do {0:hh}:{0:mm} ">
+                                                    <Binding Path="LessonStart" />
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
@@ -197,14 +196,11 @@
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>   
+                        </ListBox.ItemTemplate>
                     </ListBox>
                     <Label Content="Moje kursy:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <Label Content="Najbliższe zajęcia:" HorizontalAlignment="Left" Margin="456,0,0,0" VerticalAlignment="Top" FontSize="24"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Najbliższe zajęcia">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
         <Label x:Name="lbWelcomeMessage" Content="powitalnawiadomosc" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="24"/>

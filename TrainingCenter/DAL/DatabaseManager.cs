@@ -92,6 +92,11 @@ namespace TrainingCenter.DAL
             var courses = (from p in db.CourseStudentsTable where p.Course.LeadingTeacher.Email == email select p).ToList();
             return courses;
         }
+        public List<CourseStudents> getMyCoursesImLeading(int accId)
+        {
+            var courses = (from p in db.CourseStudentsTable where p.Course.LeadingTeacher.AccountId == accId select p).ToList();
+            return courses;
+        }
         public void addObjToDB(Course course)
         {
             db.Courses.Add(course);
@@ -183,6 +188,22 @@ namespace TrainingCenter.DAL
                 var lekcje = getLessonsForCourse(a.Course.CourseId);
                 listaLekcji.AddRange(lekcje);
             }
+            listaLekcji.OrderBy(a => a.LessonStart);
+            return listaLekcji;
+        }
+        public List<Lesson> getMyLessonsAsTeacher(int AccountId)
+        {
+            //sprawdzic na jakis kursach jestem
+            //sciagnac lessony dla kazdego kursu
+            //uporzadkowac po dacie
+            var courses = getMyCoursesImLeading(AccountId);
+            List<Lesson> listaLekcji = new List<Lesson>();
+            foreach (CourseStudents a in courses)
+            {
+                var lekcje = getLessonsForCourse(a.Course.CourseId);
+                listaLekcji.AddRange(lekcje);
+            }
+            listaLekcji.OrderBy(a => a.LessonStart);
             return listaLekcji;
         }
     }

@@ -10,7 +10,7 @@ namespace TrainingCenter.Model
     public class Account
     {
         public int AccountId { get; set; }
-        [StringLength(102)]
+        [StringLength(100)]
         public string Email { get; set; }
         [StringLength(250)]
         public string Password { get; set; }

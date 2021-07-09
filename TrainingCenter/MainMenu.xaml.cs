@@ -71,6 +71,11 @@ namespace TrainingCenter
                 btEditCourse.IsEnabled = false;
                 btRemoveCourse.IsEnabled = false;
             }
+            else if(MainWindow.logedInAccount.AccountType == "Student")//czyli student
+            {
+                tabAccounts.Visibility = Visibility.Collapsed;
+                tabCourses.Visibility = Visibility.Collapsed;
+            }
         }
 
         ////////////////
@@ -101,7 +106,9 @@ namespace TrainingCenter
                 listCourses = new ObservableCollection<Course>(db.getCourseList());
                 //w zakladcie MojeKursy admin widzi te ktore prowadzi
                 //listMyCourses = new ObservableCollection<CourseStudents>
-                    //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+                //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+                listMyLessons = new ObservableCollection<Lesson>(
+                db.getMyLessonsAsTeacher(MainWindow.logedInAccount.AccountId));
             }
             else if (MainWindow.logedInAccount.AccountType == "Teacher")
             {//lista kursow dla nauczyciela (tylko te ktore prowadzi)
@@ -110,7 +117,9 @@ namespace TrainingCenter
 
                 //w zakladcie MojeKursy nauczuciel widzi te ktore prowadzi
                 //listMyCourses = new ObservableCollection<CourseStudents>
-                    //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+                //(db.getMyCoursesImLeading(MainWindow.logedInAccount.Email));
+                listMyLessons = new ObservableCollection<Lesson>(
+                db.getMyLessonsAsTeacher(MainWindow.logedInAccount.AccountId));
             }
             else if (MainWindow.logedInAccount.AccountType == "Student")
             {
@@ -119,11 +128,11 @@ namespace TrainingCenter
                 listMyCourses = new ObservableCollection<CourseStudents>(
                     db.getMyCourses(MainWindow.logedInAccount.Email));
                 listBoxCoursesMyCourses.ItemsSource = listMyCourses;
-
+                listMyLessons = new ObservableCollection<Lesson>(
+                db.getMyLessons(MainWindow.logedInAccount.AccountId));
+                
             }
 
-            listMyLessons = new ObservableCollection<Lesson>(
-                db.getMyLessons(MainWindow.logedInAccount.AccountId));
             listBoxMyLessons.ItemsSource = listMyLessons;
             listBoxCoursesSignUp.ItemsSource = listCoursesToSignUp;
             searchCourseAdd();
@@ -140,6 +149,7 @@ namespace TrainingCenter
             Account acc = new Account
             {
                 Email = tbEmail.Text,
+                Password = PasswordHasher.Hash(pbUsers.Password),
                 FirstName = tbFirstName.Text,
                 LastName = tbLastName.Text,
                 AccountType = cbAccountType.Text,
@@ -155,20 +165,46 @@ namespace TrainingCenter
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            db.addObjToDB(createAccountFromTextBox());
-            refreshAccountList();
+            if (pbUsers.Password == "")
+            {
+                MessageBox.Show("Wpisz hasło", "Błąd");
+            }
+            else if (!DataCheck.IsEmailValid(tbEmail.Text))
+            {
+                MessageBox.Show("Niepoprawny adres email", "Błąd");
+            }
+            else if (!db.isEmailAvailable(tbEmail.Text))
+            {
+                MessageBox.Show("Adres email zajęty", "Bład");
+            }
+            else
+            {
+                db.addObjToDB(createAccountFromTextBox());
+                refreshAccountList();
+            }
         }
 
         private void btEdit_Click(object sender, RoutedEventArgs e)
         {
             if (listViewAccounts.SelectedValue != null)
             {
-                Account editedAccount = createAccountFromTextBox();
-                editedAccount.SignUpDate = selectedAccount.SignUpDate;
-                editedAccount.Password = selectedAccount.Password;
-                editedAccount.AccountId = selectedAccount.AccountId;
-                db.editObjInDB(editedAccount);
-                refreshAccountList();
+                if (!DataCheck.IsEmailValid(tbEmail.Text))
+                {
+                    MessageBox.Show("Niepoprawny adres email", "Błąd");
+                }
+                else if (!db.isEmailAvailable(tbEmail.Text))
+                {
+                    MessageBox.Show("Adres email zajęty", "Bład");
+                }
+                else
+                {
+                    Account editedAccount = createAccountFromTextBox();
+                    editedAccount.SignUpDate = selectedAccount.SignUpDate;
+                    editedAccount.Password = selectedAccount.Password;
+                    editedAccount.AccountId = selectedAccount.AccountId;
+                    db.editObjInDB(editedAccount);
+                    refreshAccountList();
+                }
             }
             else
             {
