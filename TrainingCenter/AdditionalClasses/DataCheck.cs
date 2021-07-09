@@ -15,7 +15,6 @@ namespace TrainingCenter.AdditionalClasses
             try
             {
                 MailAddress m = new MailAddress(emailaddress);
-
                 return true;
             }
             catch (FormatException)

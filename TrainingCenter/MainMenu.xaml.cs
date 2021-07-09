@@ -59,6 +59,7 @@ namespace TrainingCenter
             lbWelcomeMessage.Content = "Witaj ponownie, " + 
                 MainWindow.logedInAccount.FirstName + " " + 
                 MainWindow.logedInAccount.LastName + "!";
+            //obsluga ktore okna widzi kazdy typ usera
             if (MainWindow.logedInAccount.AccountType=="Admin")
             {
                 listBoxCoursesMyCourses.IsEnabled = false;
@@ -71,7 +72,7 @@ namespace TrainingCenter
                 btEditCourse.IsEnabled = false;
                 btRemoveCourse.IsEnabled = false;
             }
-            else if(MainWindow.logedInAccount.AccountType == "Student")//czyli student
+            else if(MainWindow.logedInAccount.AccountType == "Student")
             {
                 tabAccounts.Visibility = Visibility.Collapsed;
                 tabCourses.Visibility = Visibility.Collapsed;
